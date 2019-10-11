@@ -1,14 +1,15 @@
 import React from 'react';
+import Logo from '../../assets/img/kkkkkkkkkkkkkklogo.png'
+import './Header.css'
 
 function Header(){
     return(
         <header>
             <nav>
-                <a href="Home.html"><img src="https://fontmeme.com/permalink/191008/c1530dbd18ec49e01ec09eda253b5ac4.png" alt="netflix-font" border="0"/></a>
-                <a href="Login.html">Login</a>
+                <a href=""><img src={Logo} alt="opflix_logo"/></a>
+                <a id='login' href="">Login</a>
             </nav>
-            <h1 style="display: none">OPFLIX</h1>
-            <h2>Confira os últimos lançamentos do mundo cinematográfico!</h2>
+            <h1>OPFLIX</h1>
         </header>
     );
 }

@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    background: #bfbb89;
+}
+
+.centro {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: #bfbb89;
+}
+ 
+nav{
+    background: none;
+}
+
+h1{
+    display: none;
+}

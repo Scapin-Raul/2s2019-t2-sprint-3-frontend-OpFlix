@@ -1,0 +1,16 @@
+nav{
+    background: black;
+    display: flex;
+    justify-content: space-between;    
+}
+h1{
+    display: none;
+}
+#login{
+    text-decoration: none;
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-right: 2em;
+    font-weight: bold;
+    color: #7c21eb;
+}
