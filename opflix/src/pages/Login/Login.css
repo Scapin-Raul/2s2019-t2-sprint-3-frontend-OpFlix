@@ -1,6 +1,8 @@
 *{
     padding: 0;
     margin: 0;
+}
+body{
     background: #bfbb89;
 }
 
@@ -11,10 +13,55 @@
     background: #bfbb89;
 }
  
-nav{
+#login__div--nav{
     background: none;
+}
+
+nav img{
+    width: 110%;
 }
 
 h1{
     display: none;
+}
+
+#login__div--section h2{
+    color: black;
+    margin: 0;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+#login__div--section p{
+    color: black;
+    font-size: 1em;
+}
+
+#login__div--section{
+    background: #ebe821;
+    width: 35%;
+    margin: 1em auto 0 auto;
+    text-align: center;
+    border: 2px solid #380f6b;
+    padding: 1em;
+}
+
+#login__div--section form{
+    display: flex;
+    flex-direction: column;
+    
+}
+ 
+#login__div--section form input{
+    width: 50%;
+    margin: 0 auto 2em auto;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #380f6b;
+}
+.label{
+    margin-left: 8em;
+    text-align: left;
 }

@@ -57,7 +57,22 @@ h2{
   padding: 0 0 0 1em;
 }
 
-.img_fav{
+.home__img--fav{
   margin-right: 5em;
-  width: 20px; height: 20px
+  width: 20px; height: 20px;
+}
+.home__img--fav:hover{
+  cursor: pointer;
+}
+
+.home__div--fav{
+  display: flex;
+  flex-direction: column;
+}
+#home__filtros--h3{
+  text-align: center;
+}
+
+.home__filtros_individual{
+  margin-top: 2em;
 }
