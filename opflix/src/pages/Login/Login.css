@@ -3,14 +3,14 @@
     margin: 0;
 }
 body{
-    background: #bfbb89;
+    background: #f3f394;
 }
 
 .centro {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background: #bfbb89;
+    background: #f3f394;
 }
  
 #login__div--nav{
@@ -33,7 +33,7 @@ h1{
 }
 
 #login__div--section p{
-    color: black;
+    /* color: black; */
     font-size: 1em;
 }
 
@@ -44,6 +44,7 @@ h1{
     text-align: center;
     border: 2px solid #380f6b;
     padding: 1em;
+    margin-bottom: 7em;
 }
 
 #login__div--section form{
@@ -64,4 +65,9 @@ h1{
 .label{
     margin-left: 8em;
     text-align: left;
+}
+
+#login__form--mensagemErro{
+    text-decoration: underline;
+    color: rgb(200, 0, 0);
 }

@@ -22,7 +22,8 @@ class Login extends Component{
             this.props.history.push('/');
         }
         else{
-            
+            const mensagemErro = document.querySelector("#login__form--mensagemErro");
+            mensagemErro.innerHTML = "Email ou senha inválidos";
         }
 
     }
@@ -59,7 +60,7 @@ class Login extends Component{
                     <h2>LOGIN</h2>
 
                     <form>
-                        <p id="mensagemErro"></p>
+                        <p id="login__form--mensagemErro"></p>
                         <label className="label"  for="email">Email</label>
                         <input type="text" id="email" name="email" onChange={this.atualizarInputs}/>
                         <label className="label" for="senha">Senha</label>

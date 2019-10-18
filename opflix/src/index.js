@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/Home/App';
 import Login from './pages/Login/Login';
+import Admin from './pages/Admin/Admin';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado';
 
 
@@ -32,6 +33,7 @@ const routing = (
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/admin" component={Admin}/>
                 <Route component={NaoEncontrado} />
             </Switch>
         </div>

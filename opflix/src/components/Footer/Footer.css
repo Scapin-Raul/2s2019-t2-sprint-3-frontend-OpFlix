@@ -1,0 +1,35 @@
+#footer__div--background{
+    background: #380f6b;
+    /* position: fixed; */
+    /* left: 0%;
+    right: 0%; */
+}   
+#footer__footer{
+    /* background: #ebe821; */
+    margin: 0 auto;
+    /* margin-top: 5em; */
+    padding-bottom: 1.35em;
+    padding-top: 2.5em;
+    text-align: center;
+    width: 80%;
+    color: #ccc;
+}
+
+#footer__footer ul{
+    list-style-type: none;
+}
+
+#footer_ul--direitos{
+    margin-top: 2em;
+}
+.footer__footer--link{
+    color: #ccc;
+    text-decoration: none;
+}
+
+#footer__footer--enfeite{
+    width: 100%;
+    border-top: 1px solid #cccccc4d;
+    margin-bottom: 2.5em;
+
+}

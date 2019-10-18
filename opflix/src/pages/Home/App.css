@@ -28,7 +28,7 @@ h2{
 }
 
 #sec_lanc{
-  background: #f1ea93;
+  background: #f3f394;
 }
 
 #lancamentos{
@@ -75,4 +75,9 @@ h2{
 
 .home__filtros_individual{
   margin-top: 2em;
+}
+
+#home__filtros--erro{
+  font-size: 0.8em;
+  color: #ebe821; 
 }

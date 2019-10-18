@@ -16,15 +16,25 @@ class  App extends Component{
     }
   }
   
-  adicionarLancamentos = (data) =>{
-    if(data.length == 0){
-      //MENSAGEM DE ERRO
+  adicionarLancamentos = (data, num) =>{
+    const pErro = document.querySelector("#home__filtros--erro");
+
+    if(data.mensagem === "Não há titulos nesta plataforma."){
+      this.buscarTitulosPadrao(1);
+      pErro.innerHTML = "Não há titulos nesta plataforma.";
+    }
+    else if(data.mensagem === "Você não favoritou nenhum título"){
+      this.buscarTitulosPadrao(1);
+      pErro.innerHTML = "Você não favoritou nenhum título.";  
     }
     else{
-      this.setState({listaLancamento: data})
+      this.setState({listaLancamento: data})  
+      if(num !== 1){
+        pErro.innerHTML = "";
+      }
     }
-    // console.log(this.state.listaLancamento)
   }
+        
   adicionarPlataformas = (data) =>{
     this.setState({listaPlataformas: data})
     // console.log(this.state.listaPlataformas)
@@ -35,6 +45,13 @@ class  App extends Component{
     var days = String(date[0]).split('-');
     return [days[2].toString() +'/'+ days[1].toString()+'/'+ days[0].toString()];
   }
+
+  buscarTitulosPadrao = (num) =>{
+    fetch('http://localhost:5000/api/Titulos/')
+    .then(response => response.json())
+    .then(data => this.adicionarLancamentos(data,num))
+    .catch(error => console.log(error));
+  }
   
   componentDidMount(){
     fetch('http://localhost:5000/api/Plataformas')
@@ -42,10 +59,7 @@ class  App extends Component{
     .then(data => this.adicionarPlataformas(data))
     .catch(error => console.log(error));
 
-    fetch('http://localhost:5000/api/Titulos/')
-    .then(response => response.json())
-    .then(data => this.adicionarLancamentos(data))
-    .catch(error => console.log(error));
+    this.buscarTitulosPadrao();
   }
 
   buscarPorPlataforma = (e) =>{
@@ -62,10 +76,7 @@ class  App extends Component{
       .catch(error => console.log(error));
     }
     else{
-      fetch('http://localhost:5000/api/Titulos/')
-      .then(response => response.json())
-      .then(data => this.adicionarLancamentos(data))
-      .catch(error => console.log(error));
+      this.buscarTitulosPadrao();
     }
   }
   
@@ -86,41 +97,57 @@ class  App extends Component{
   }
   
   favoritar = (idTitulo) =>{
-    const url = "http://localhost:5000/api/Usuarios/favoritos/"+idTitulo;
-    // console.log(url)
-
-    fetch(url,{
-            method: 'POST', 
-            headers: {
-              'Accept': 'application/json',
-              "Authorization":"Bearer " + this.state.token
-              // "Content-Type": "application/json",
-            }
-          })
-    .then(response => response.json())
-    .then(data => this.definirLogin(data))
-    .catch(error => console.log(error));
-  }
-  
-  buscarFavoritos = (e) =>{
-    if(this.state.token != null){
-
-      const url = "http://localhost:5000/api/Usuarios/favoritos"
-
+    if(this.state.token != null){    
+      const url = "http://localhost:5000/api/Usuarios/favoritos/"+idTitulo;
+      // console.log(url)
+      
       fetch(url,{
-        method: 'GET', 
+        method: 'POST', 
         headers: {
           'Accept': 'application/json',
           "Authorization":"Bearer " + this.state.token
+          // "Content-Type": "application/json",
         }
       })
       .then(response => response.json())
-      .then(data => this.adicionarLancamentos(data))
+      .then(data => this.definirLogin(data))
       .catch(error => console.log(error));
-
     }
     else{
-      console.log('b')
+      const pErro = document.querySelector("#home__filtros--erro");
+      pErro.innerHTML = "Você deve estar logado para favoritar um titulo.";
+  
+    }
+  }
+  
+  buscarFavoritos = (e) =>{
+    var valorCheckbox = document.querySelector("#home__fav--checkbox").checked;
+
+    if(valorCheckbox){
+    const pErro = document.querySelector("#home__filtros--erro");
+
+      if(this.state.token != null){
+        const url = "http://localhost:5000/api/Usuarios/favoritos"
+        
+        fetch(url,{
+          method: 'GET', 
+          headers: {
+            'Accept': 'application/json',
+            "Authorization":"Bearer " + this.state.token
+          }
+        })
+        .then(response => response.json())
+        .then(data => this.adicionarLancamentos(data))
+        .catch(error => console.log(error));
+        pErro.innerHTML = "";
+        
+      }
+      else{
+        pErro.innerHTML = "Você deve estar logado para usar esta opção.";
+
+      }
+    }else{
+      this.buscarTitulosPadrao();
     }
   }
 
@@ -139,6 +166,8 @@ class  App extends Component{
           <div id='filtros'>
 
             <h3 id="home__filtros--h3">Filtrar por:</h3>
+              <p id="home__filtros--erro"></p>
+
             
             <div id="home__div--plat" className="home__filtros_individual">
 
@@ -161,8 +190,8 @@ class  App extends Component{
             </div>
 
             <div id="home__div--fav" className="home__filtros_individual">
-              <label for="fav">Favoritos:</label> <br/>
-              <button name="fav" onClick={this.buscarFavoritos}>Buscar</button>
+              <label for="fav">Buscar por favoritos:</label> <br/>
+              <input type="checkbox" name="fav" id="home__fav--checkbox" onChange={this.buscarFavoritos}/>
             </div>
           
           </div>
@@ -171,23 +200,23 @@ class  App extends Component{
         <section id='sec_lanc'>
 
           <h2>Confira os últimos lançamentos do mundo cinematográfico!</h2>
-          <p id="home__section--erro"></p>
+          <p id="home__titulos--erro"></p>
           <div id="lancamentos">
 
               {
                 this.state.listaLancamento.map(e => {
                   return(
                     <div className="lancamento">
-                    <div className="lancamentoDiv">
-                    <p className="titulo">{e.nome}</p>
-                    <img className="home__img--fav" onClick={() => this.favoritar(e.idTitulo)} src={img_fav} alt="Favoritar/Desfavoritar lançamento"/>
-                    </div>
-                    <p>Sinopse: {e.sinopse}</p>
-                    <p>Duração do filme: {e.duracao} </p>
-                    <p>Plataforma: {e.plataforma}</p>
-                    <p>Categoria: {e.categoria}</p>
-                    <p>Classificação: {e.classificacao}</p> 
-                    <p>Data de Lançamento: {this.getParsedDate(e.dataLancamento)}</p>
+                      <div className="lancamentoDiv">
+                        <p className="titulo">{e.nome}</p>
+                        <img className="home__img--fav" onClick={() => this.favoritar(e.idTitulo)} src={img_fav} alt="Favoritar/Desfavoritar lançamento"/>
+                      </div>
+                      <p>Sinopse: {e.sinopse}</p>
+                      <p>Duração do filme: {e.duracao} </p>
+                      <p>Plataforma: {e.plataforma}</p>
+                      <p>Categoria: {e.categoria}</p>
+                      <p>Classificação: {e.classificacao}</p> 
+                      <p>Data de Lançamento: {this.getParsedDate(e.dataLancamento)}</p>
                   </div>
               )})}
             
