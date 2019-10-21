@@ -1,0 +1,14 @@
+#admin__div--separador{
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin__separador--sections{
+    /* width: 45% */
+    margin: 0 auto;
+}
+
+#admin__section--form{
+    display: flex;
+    flex-direction: column;
+}

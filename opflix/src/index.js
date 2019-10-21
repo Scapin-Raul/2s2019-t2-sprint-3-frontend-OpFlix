@@ -5,27 +5,29 @@ import App from './pages/Home/App';
 import Login from './pages/Login/Login';
 import Admin from './pages/Admin/Admin';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado';
-
+import { parseJwt } from '../src/services/auth';
 
 import * as serviceWorker from './serviceWorker';
 
 import {Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 
-// const RotaPrivada = ({component: Component, ...rest}) => (
-//     <Route
-//         {...rest}
-//         render={props => 
-//             localStorage.getItem("Token") !== null ? 
-//                 <Component {...props}/> 
-//                 :
-//                 <Redirect
-//                     to={{ pathname: '/login', state: {from: props.location} }}
-//                 />
-
-//         }
-//     >
-//     </Route>
-// )
+const RotaPrivada = ({component: Component}) => (
+    <Route
+        render={
+            props => 
+                localStorage.getItem('usuario-token') != null?(
+                    parseJwt().sub === "True"? (
+                        <Admin/>
+                        ) : (
+                        <App {...props}/> 
+                        )
+                    ) : (   
+                    <App {...props}/> 
+                )
+        }
+    >
+    </Route>
+)
 
 const routing = (
     <Router>
@@ -33,7 +35,7 @@ const routing = (
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/admin" component={Admin}/>
+                <RotaPrivada path="/admin" component={App}/>
                 <Route component={NaoEncontrado} />
             </Switch>
         </div>
