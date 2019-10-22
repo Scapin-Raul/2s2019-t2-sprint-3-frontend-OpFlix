@@ -19,7 +19,8 @@ class Login extends Component{
         if(data.token != null){
             console.log(data);
             localStorage.setItem("usuario-token",data.token);
-            this.props.history.push('/');
+            // this.props.history.push('/');
+            window.location.reload();
         }
         else{
             const mensagemErro = document.querySelector("#login__form--mensagemErro");

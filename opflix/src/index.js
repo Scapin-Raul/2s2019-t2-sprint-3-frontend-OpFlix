@@ -29,12 +29,28 @@ const RotaPrivada = ({component: Component}) => (
     </Route>
 )
 
+const RotaLogin = ({component: Component}) =>(
+    <Route
+        render={
+            props=>
+                localStorage.getItem('usuario-token') != null?
+                <App/>
+                :
+                <Login/> 
+        }
+    >
+
+    </Route>
+)
+
+//ADICIONAR FUNCAO QUE REDIRECIONA PARA A HOME USUÁRIO JA LOGADO! :D
+
 const routing = (
     <Router>
         <div>
             <Switch>
                 <Route exact path="/" component={App}/>
-                <Route path="/login" component={Login}/>
+                <RotaLogin path="/login" component={Login}/>
                 <RotaPrivada path="/admin" component={App}/>
                 <Route component={NaoEncontrado} />
             </Switch>

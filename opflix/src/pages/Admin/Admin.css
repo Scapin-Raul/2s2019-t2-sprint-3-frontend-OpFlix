@@ -1,9 +1,11 @@
-#admin__div--separador{
+#admin__div--editar{
     display: flex;
     justify-content: space-between;
 }
 
 .admin__separador--sections{
+    display: flex;
+    flex-direction: column;
     /* width: 45% */
     margin: 0 auto;
 }
@@ -11,4 +13,19 @@
 #admin__section--form{
     display: flex;
     flex-direction: column;
+}
+
+.admin__add--del{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5em auto;
+}
+
+#admin__div_separador{
+    display: flex;
+}
+
+#admin__div__lancamentos{
+    display: flex;
 }
