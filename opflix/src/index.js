@@ -5,6 +5,7 @@ import App from './pages/Home/App';
 import Login from './pages/Login/Login';
 import Admin from './pages/Admin/Admin';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado';
+import Cadastro from './pages/Cadastro/Cadastro';
 import { parseJwt } from '../src/services/auth';
 
 import * as serviceWorker from './serviceWorker';
@@ -43,13 +44,12 @@ const RotaLogin = ({component: Component}) =>(
     </Route>
 )
 
-//ADICIONAR FUNCAO QUE REDIRECIONA PARA A HOME USUÁRIO JA LOGADO! :D
-
 const routing = (
     <Router>
         <div>
             <Switch>
                 <Route exact path="/" component={App}/>
+                <Route path="/cadastro" component={Cadastro}/>
                 <RotaLogin path="/login" component={Login}/>
                 <RotaPrivada path="/admin" component={App}/>
                 <Route component={NaoEncontrado} />

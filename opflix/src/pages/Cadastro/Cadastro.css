@@ -1,0 +1,37 @@
+#cadastro__form{
+    background: #ebe821;
+    width: 35%;
+    margin: 1em auto 3em auto;
+    text-align: center;
+    border: 2px solid #380f6b;
+    /* padding: 1.5em 2em; */
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro__label{
+    text-align: left;
+    margin-left: 8em;
+}
+
+#cadastro__form input{
+    width: 50%;
+    margin: 0 auto 2em auto;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #380f6b;
+}
+#cadastro__h2{
+
+    color: black;
+    margin: 0;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+#cadastro__erro{
+    color: rgb(200, 0, 0);
+}

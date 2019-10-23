@@ -199,6 +199,34 @@ class Admin extends Component{
         .catch(error => console.log(error));
     }
 
+    cadastrarPlataforma = (e)=>{
+        e.preventDefault();
+        const nomePlataforma = document.getElementById('admin__input--nomeplataforma').value;
+        console.log(nomePlataforma);
+        
+        const url = "http://localhost:5000/api/Plataformas/"
+        axios.post(url,{    
+            nome: nomePlataforma
+        }, 
+        {headers: {Authorization: "Bearer " + this.state.token}
+        })
+        .then(response => console.log(response.data), this.atualizarPagina)
+        .catch(error => console.log(error));
+    }
+
+    deletarPlataforma = (e)=>{
+        var e = document.getElementById("admin__deletar--plataformas");
+        var idPlataformaDeletar = e.options[e.selectedIndex].value;
+                
+        const url = 'http://localhost:5000/api/Plataformas/'+idPlataformaDeletar;
+
+        axios.delete(url, 
+            {headers: {Authorization: "Bearer " + this.state.token}
+        })
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+    }
+    
 
      render(){
         return(
@@ -306,31 +334,61 @@ class Admin extends Component{
                     </div>
                 </div>
 
-                <div id="admin__div--categorias">
-                    <div id="admin__categorias--adicionar">
-                        <h3>Adicionar categoria</h3>
-                        <form>
-                            <input type="text" id="admin__input--nomecategoria" placeholder="Nome da categoria"/>
-                            <input onClick={this.cadastrarCategoria} type="submit" value="Cadastrar"/>
-                        </form>
+                <div id="admin__div--cateplat">
+
+                    <div id="admin__div--categorias">
+
+                        <div id="admin__categorias">
+                            <div id="admin__categorias--adicionar">
+                                <h3>Adicionar categoria</h3>
+                                <form>
+                                    <input type="text" id="admin__input--nomecategoria" placeholder="Nome da categoria"/>
+                                    <input onClick={this.cadastrarCategoria} type="submit" value="Cadastrar"/>
+                                </form>
+                            </div>
+
+                            <div id="admin__categorias--deletar">
+                                <h3>Deletar categoria</h3>
+
+                                <select id="admin__deletar--categorias" name="categorias">
+                                            <option value="0">Categoria</option> 
+                                            {this.state.listaCategoria.map(e => { 
+                                                return(
+                                                    <option value={e.idCategoria}>{e.nome}</option>
+                                                    )})} 
+                                </select>
+                                <input onClick={this.deletarCategoria} type="submit" value="Deletar"/>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div id="admin__categorias--deletar">
-                        <h3>Deletar categoria</h3>
+                    <div id="admin__plataformas">
+                        <div id="admin__plataformas--adicionar">
+                            <h3>Adicionar plataforma</h3>
+                            <form>
+                                <input type="text" id="admin__input--nomeplataforma" placeholder="Nome da plataforma"/>
+                                <input onClick={this.cadastrarPlataforma} type="submit" value="Cadastrar"/>
+                            </form>
+                        </div>
 
-                        <select id="admin__deletar--categorias" name="categorias">
-                                    <option value="0">Categoria</option> 
-                                    {this.state.listaCategoria.map(e => { 
-                                    return(
-                                        <option value={e.idCategoria}>{e.nome}</option>
-                                    )})} 
-                        </select>
-                        <input onClick={this.deletarCategoria} type="submit" value="Deletar"/>
+                        <div id="admin__plataformas--deletar">
+                            <h3>Deletar plataforma</h3>
+
+                            <select id="admin__deletar--plataformas" name="plataformas">
+                                        <option value="0">Plataforma</option> 
+                                        {this.state.listaPlataforma.map(e => { 
+                                            return(
+                                                <option value={e.idPlataforma}>{e.nome}</option>
+                                                )})} 
+                            </select>
+                            <input onClick={this.deletarPlataforma} type="submit" value="Deletar"/>
+                        </div>
+
                     </div>
+
 
                 </div>
-
-
                
                
                 <Rodape/>

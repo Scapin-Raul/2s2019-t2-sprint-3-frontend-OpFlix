@@ -70,6 +70,7 @@ class Login extends Component{
                     </form>
 
                     <p>Está tendo problemas com seu login? <br/>Problema seu kasfdauhhfy7q8gebtwfyq</p>
+                    <Link id='a' to="/cadastro">Cadastro</Link>
 
                 </section>
 

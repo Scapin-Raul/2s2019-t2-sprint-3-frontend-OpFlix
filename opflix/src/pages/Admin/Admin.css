@@ -29,3 +29,9 @@
 #admin__div__lancamentos{
     display: flex;
 }
+
+#admin__div--cateplat{
+    margin: 4em 0;
+    display: flex;
+    justify-content: space-evenly;
+}
