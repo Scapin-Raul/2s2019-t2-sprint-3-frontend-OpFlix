@@ -27,12 +27,12 @@ class Admin extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:5000/api/Titulos/')
+        fetch('http://192.168.4.203:5000/api/Titulos/')
         .then(response => response.json())
         .then(data => this.setState({listaTitulo: data}))
         .catch(error => console.log(error));
         
-        fetch('http://localhost:5000/api/Categorias/',{
+        fetch('http://192.168.4.203:5000/api/Categorias/',{
             method: 'GET', 
             headers: {
                 'Accept': 'application/json',
@@ -43,7 +43,7 @@ class Admin extends Component{
         .then(data => this.adicionarCategoria(data))
         .catch(error => console.log(error));
         
-        fetch('http://localhost:5000/api/Plataformas')
+        fetch('http://192.168.4.203:5000/api/Plataformas')
         .then(response => response.json())
         .then(data => this.adicionarPlataformas(data))
         .catch(error => console.log(error));
@@ -92,7 +92,7 @@ class Admin extends Component{
         var listatipostitulos = document.getElementById("admin__select--tipostitulos");
         var idTipoTitulo = listatipostitulos.options[listatipostitulos.selectedIndex].value;
         
-        const url = 'http://localhost:5000/api/Titulos/'+id;
+        const url = 'http://192.168.4.203:5000/api/Titulos/'+id;
         console.log(url);
 
         axios.put(url,{    
@@ -137,7 +137,7 @@ class Admin extends Component{
         var listatipostitulos = document.getElementById("admin__select--tipostitulos--adicionar");
         var idTipoTitulo = listatipostitulos.options[listatipostitulos.selectedIndex].value;
 
-        const url = 'http://localhost:5000/api/Titulos/';
+        const url = 'http://192.168.4.203:5000/api/Titulos/';
 
         axios.post(url,{    
                 nome: nome,
@@ -160,7 +160,7 @@ class Admin extends Component{
         var e = document.getElementById("admin__select--deletar");
         var idTituloDeletar = e.options[e.selectedIndex].value;
                 
-        const url = 'http://localhost:5000/api/Titulos/'+idTituloDeletar;
+        const url = 'http://192.168.4.203:5000/api/Titulos/'+idTituloDeletar;
         
         console.log(url);
 
@@ -176,7 +176,7 @@ class Admin extends Component{
         const nomeCategoria = document.getElementById('admin__input--nomecategoria').value;
         console.log(nomeCategoria);
         
-        const url = "http://localhost:5000/api/Categorias/"
+        const url = "http://192.168.4.203:5000/api/Categorias/"
         axios.post(url,{    
             nome: nomeCategoria
         }, 
@@ -190,7 +190,7 @@ class Admin extends Component{
         var e = document.getElementById("admin__deletar--categorias");
         var idCategoriaDeletar = e.options[e.selectedIndex].value;
                 
-        const url = 'http://localhost:5000/api/Categorias/'+idCategoriaDeletar;
+        const url = 'http://192.168.4.203:5000/api/Categorias/'+idCategoriaDeletar;
 
         axios.delete(url, 
             {headers: {Authorization: "Bearer " + this.state.token}
@@ -204,7 +204,7 @@ class Admin extends Component{
         const nomePlataforma = document.getElementById('admin__input--nomeplataforma').value;
         console.log(nomePlataforma);
         
-        const url = "http://localhost:5000/api/Plataformas/"
+        const url = "http://192.168.4.203:5000/api/Plataformas/"
         axios.post(url,{    
             nome: nomePlataforma
         }, 
@@ -218,7 +218,7 @@ class Admin extends Component{
         var e = document.getElementById("admin__deletar--plataformas");
         var idPlataformaDeletar = e.options[e.selectedIndex].value;
                 
-        const url = 'http://localhost:5000/api/Plataformas/'+idPlataformaDeletar;
+        const url = 'http://192.168.4.203:5000/api/Plataformas/'+idPlataformaDeletar;
 
         axios.delete(url, 
             {headers: {Authorization: "Bearer " + this.state.token}

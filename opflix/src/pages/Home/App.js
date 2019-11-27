@@ -47,14 +47,14 @@ class  App extends Component{
   }
 
   buscarTitulosPadrao = (num) =>{
-    fetch('http://localhost:5000/api/Titulos/')
+    fetch('http://192.168.4.203:5000/api/Titulos/')
     .then(response => response.json())
     .then(data => this.adicionarLancamentos(data,num))
     .catch(error => console.log(error));
   }
   
   componentDidMount(){
-    fetch('http://localhost:5000/api/Plataformas')
+    fetch('http://192.168.4.203:5000/api/Plataformas')
     .then(response => response.json())
     .then(data => this.adicionarPlataformas(data))
     .catch(error => console.log(error));
@@ -68,7 +68,7 @@ class  App extends Component{
     // console.log(result);
     
     if(result != '0'){
-      const url = 'http://localhost:5000/api/Plataformas/titulos/'+result;
+      const url = 'http://192.168.4.203:5000/api/Plataformas/titulos/'+result;
       // console.log(url)
       fetch(url)
       .then(response => response.json())
@@ -88,7 +88,7 @@ class  App extends Component{
     if (data.value.length > 5) {
       var days = String(data.value).split('-');
       var dataTratada = [days[2].toString() +'-'+ days[1].toString()+'-'+ days[0].toString()];
-      fetch('http://localhost:5000/api/Titulos/data/'+dataTratada)
+      fetch('http://192.168.4.203:5000/api/Titulos/data/'+dataTratada)
       .then(response => response.json())
       .then(data => this.adicionarLancamentos(data))
       .catch(error => console.log(error));
@@ -98,7 +98,7 @@ class  App extends Component{
   
   favoritar = (idTitulo) =>{
     if(this.state.token != null){    
-      const url = "http://localhost:5000/api/Usuarios/favoritos/"+idTitulo;
+      const url = "http://192.168.4.203:5000/api/Usuarios/favoritos/"+idTitulo;
       // console.log(url)
       
       fetch(url,{
@@ -127,7 +127,7 @@ class  App extends Component{
     const pErro = document.querySelector("#home__filtros--erro");
 
       if(this.state.token != null){
-        const url = "http://localhost:5000/api/Usuarios/favoritos"
+        const url = "http://192.168.4.203:5000/api/Usuarios/favoritos"
         
         fetch(url,{
           method: 'GET', 

@@ -33,7 +33,7 @@ class Cadastro extends Component{
 
         
         if(nome.length >= 3 && senha.length >= 4 && email.length >= 4  && email.includes("@") && data.length > 4){
-            const url = "http://localhost:5000/api/Usuarios/";
+            const url = "http://192.168.4.203:5000/api/Usuarios/";
             
             axios.post(url,{
                 nome: nome,
