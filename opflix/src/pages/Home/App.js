@@ -3,6 +3,7 @@ import './App.css';
 import img_fav from '../../assets/img/estrela_fav.png'
 import Topo from '../../components/Header/Header'
 import Rodape from '../../components/Footer/Footer'
+import {Link} from 'react-router-dom';
 
 
 class  App extends Component{
@@ -195,6 +196,9 @@ class  App extends Component{
             </div>
           
           </div>
+
+          <Link to="/localizacoes"><p>Localizações de cinemas em SP</p></Link>
+
         </div>
         
         <section id='sec_lanc'>
