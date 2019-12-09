@@ -37,7 +37,7 @@ class Login extends Component{
     efetuarLogin = (e) =>{
         e.preventDefault();
 
-        const url = "http://192.168.4.203:5000/api/Login/";
+        const url = "http://192.168.4.93:5000/api/Login/";
 
         fetch(url,{
             method: 'POST', body: JSON.stringify({email: this.state.email, senha: this.state.senha}),
