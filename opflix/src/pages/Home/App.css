@@ -81,3 +81,13 @@ h2{
   font-size: 0.8em;
   color: #ebe821; 
 }
+
+
+#localizacoes {
+  text-align: center;
+  text-decoration: none;
+}
+#localizacoes p {
+  text-decoration: none;
+  color: #fff;
+}

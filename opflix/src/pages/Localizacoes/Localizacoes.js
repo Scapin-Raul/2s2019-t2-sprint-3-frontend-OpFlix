@@ -1,63 +1,59 @@
 import React, { Component } from 'react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import Topo from '../../components/Header/Header'
 
 class Localizacoes extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            Localizacoes: []
 
-    componentDidMount() {
+        }
+    }
 
-        fetch("http://192.168.4.93:5000/api/localizacoes")
+    adicionarLocalizacoes = () => {
+        fetch("http://192.168.4.93:5000/api/Localizacoes/")
             .then(res => res.json())
-            .then(data => this.montarMapa(data))
+            .then(data => this.setState({ Localizacoes: data }))
             .catch(error => console.log(error));
     }
 
-    // montarMapa = (itens) => {
-    //     var map = new google.maps.Map(document.getElementById("map"), {
-    //         zoom: 10,
-    //         center: new google.maps.LatLng(-23.5345442, -46.6493879),
-    //         mapTypeId: google.maps.MapTypeId.ROADMAP
-    //     });
+    marcadores = () => {
+        let marcadores = [];
 
-    //     var infowindow = new google.maps.InfoWindow();
+        this.state.Localizacoes.forEach(e => {
+            marcadores.push(
+                <Marker position={{ lat: e.latitude, lng: e.longitude }} />
+            )
+        })
+        return marcadores;
+    }
 
-    //     var marker, i;
-
-    //     for (i = 0; i < itens.length; i++) {
-    //         console.log(itens[i].latitude);
-    //         marker = new google.maps.Marker({
-    //             position: new google.maps.LatLng(
-    //                 itens[i].latitude,
-    //                 itens[i].longitude
-    //             ),
-    //             map: map
-    //         });
-
-    //         google.maps.event.addListener(
-    //             marker,
-    //             "click",
-    //             (function (marker, i) {
-    //                 return function () {
-    //                     infowindow.setContent(itens[i].id);
-    //                     infowindow.open(map, marker);
-    //                 };
-    //             })(marker, i)
-    //         );
-    //     }
-    // }
-
+    componentWillMount() {
+        this.adicionarLocalizacoes();
+    }
 
     render() {
         return (
-            <div id="map"></div>
-
-
-
+            <div>
+                <Topo />
+                <Map google={this.props.google}
+                    style={{ width: '100%', height: '100%', position: 'relative' }}
+                    className={'map'}
+                    zoom={11}
+                    initialCenter={{
+                        lat: -23.5345442,
+                        lng: -46.6493879
+                    }}
+                >
+                    {this.marcadores()}
+                </Map>
+            </div>
         )
-
-
-
-
     }
 }
 
-export default Localizacoes;
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyC6BWOev4iy16PGYkfagX-s07yLGO92hLk") //developer skey ?
+})(Localizacoes)
