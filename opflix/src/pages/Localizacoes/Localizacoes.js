@@ -8,7 +8,7 @@ class Localizacoes extends Component {
         super();
         this.state = {
             Localizacoes: []
-
+            
         }
     }
 

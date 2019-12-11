@@ -18,7 +18,9 @@ class Admin extends Component {
             tituloSelecionado: [],
             token: localStorage.getItem('usuario-token'),
             permissao: false,
-            tituloAdicionar: []
+            tituloAdicionar: [],
+            latitude: "",
+            longitude: "",
         }
     }
 
@@ -234,6 +236,24 @@ class Admin extends Component {
             .catch(error => console.log(error));
     }
 
+    cadastrarLocalizacao = (e) => {
+        e.preventDefault();
+        const lat = document.getElementById('admin__input--lat').value;
+        const lng = document.getElementById('admin__input--lng').value;
+
+        console.log(lat, lng);
+
+        let url = "http://192.168.4.93:5000/api/Localizacoes/"
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              "Authorization": "Bearer " + this.state.token
+            }
+          })
+          .then(response => console.log(response.data), this.atualizarPagina)
+          .catch(error => console.log(error));
+    }
 
     render() {
         return (
@@ -405,6 +425,16 @@ class Admin extends Component {
                     </div>
 
 
+                </div>
+
+
+                <div id="admin__div--localizacao">
+                    <h3>Localizações</h3>
+                    <form>
+                        <input type="text" id="admin__input--lat" placeholder="Latitude" />
+                        <input type="text" id="admin__input--lng" placeholder="Longitude" />
+                        <input type="submit" value="Cadastrar" onClick={this.cadastrarLocalizacao} />
+                    </form>
                 </div>
 
 

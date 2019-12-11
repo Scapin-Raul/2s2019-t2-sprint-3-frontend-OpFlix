@@ -91,3 +91,13 @@ h2{
   text-decoration: none;
   color: #fff;
 }
+#admin__div--localizacao{
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+}
+#admin__div--localizacao form{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+}
